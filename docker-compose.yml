@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  bedrock_europe:
+    build:
+      context: europe/
+    network_mode: none
+  europe_europe:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        PROJECT: ${COMPOSE_PROJECT_NAME}
+    depends_on:
+      - bedrock_europe
+    network_mode: none
+  iberia_africa:
+    build:
+      context: iberia_africa/
+      args:
+        PROJECT: ${COMPOSE_PROJECT_NAME}
+    volumes:
+      - ./pdf:/pdf
+    network_mode: none      
+    depends_on:
+      - europe_europe
+    

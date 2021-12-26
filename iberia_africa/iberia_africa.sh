@@ -6,7 +6,6 @@ SOUTH=30
 NORTH=45
 
 WIDTH=15c
-
 PROJECTION=-JM10/${WIDTH}
 
 OPT="-V --FONT_ANNOT_PRIMARY=10p"
@@ -18,7 +17,7 @@ LAKE=170
 RIVER=220
 TRANS=15
 MINAREA=-A100
-SCALEBAR="f-5/35/40/250M"
+SCALEBAR="f-5.5/32/40/250M"
 
 if [ ! -x $(which gmt) ]
 then
@@ -53,17 +52,13 @@ then
     exit 1
 fi
 
-gmt set PS_LINE_CAP=ROUND PS_LINE_JOIN=ROUND PS_SCALE_X=1 PS_SCALE_Y=1 MAP_ORIGIN_X=1c MAP_ORIGIN_Y=1c
+gmt set PS_LINE_CAP=ROUND PS_LINE_JOIN=ROUND PS_SCALE_X=1 PS_SCALE_Y=1 MAP_ORIGIN_X=1c MAP_ORIGIN_Y=1c ANNOT_FONT_PRIMARY=18
 
 BASEMAP='-B10dg10d -B+gwhite'
 
-#gmt begin national
-#    gmt basemap -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} ${BASEMAP} 
-#    # national bounds
-#    gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -Na/1.25p,225/225/225
-#gmt end
-                                                                           
-gmt begin iberia_africa
+PROJECT='iberia_africa'
+
+gmt begin /pdf/${PROJECT}
     gmt basemap -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} ${BASEMAP} 
     gmt makecpt -Cgrey -T-50/1500
     gmt grdimage ${ETOPO1} -n+c -I+a45+nt1 ${PROJECTION} -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${OPT}
@@ -75,30 +70,32 @@ gmt begin iberia_africa
     # water bounds
     gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -L${SCALEBAR} -N3/0.25p,${LAKE}/${LAKE}/${LAKE} ${MINAREA}
 
-    #-F+f11p,Helvetica-Bold+jCB
     if [ -f city.dat ]
     then
-        cat city.dat | gmt text -Dj6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -F+f6p,Palatino-Roman+jCB    
+        cat city.dat | gmt text -Dj6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -F+f6p,Helvetica+jCB
         cat city.dat | gmt plot -Sc2p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT}
+    fi
+
+    if [ -f castle.dat ]
+    then
+        cat castle.dat | gmt text -Dj6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -F+f6p,ZapfChancery-MediumItalic+jCB
+        cat castle.dat | gmt plot -Sd4p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT}
+    fi
+
+    if [ -f monastery.dat ]
+    then
+        cat monastery.dat | gmt text -Dj6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -F+f6p,Optima-Bold+jCB    
+        cat monastery.dat | gmt plot -Sh4p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT}
     fi
 
     if [ -f battle.dat ]
     then
-
-        cat battle.dat | gmt text -Dj6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -F+f6p,Palatino-Roman+jCB    
-        cat battle.dat | gmt plot -S+4p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT}
+        cat battle.dat | gmt text -Dj6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -F+f6p,Times-Roman+jCB
+        cat battle.dat | gmt plot -S+6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT}
     fi
 
     if [ -f place.dat ]
     then
-        cat place.dat | gmt text -Dj6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -F+f6p,Palatino-Roman+jCB
+        cat place.dat | gmt text -Dj6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -F+f6p,AvantGarde-Book+jCB
     fi
-
-gmt end
-
-gmt begin border
-    gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH}  ${PROJECTION} ${OPT} -G${LAND}/${LAND}/${LAND}@${TRANS} ${MINAREA}
-    gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} ${LINE} ${MINAREA}
-    gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -N1/0.25p,${LAKE}/${LAKE}/${LAKE} ${MINAREA}
-
 gmt end

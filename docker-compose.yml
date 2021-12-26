@@ -3,15 +3,8 @@ services:
   bedrock_europe:
     build:
       context: europe/
-    network_mode: none
-  europe_europe:
-    build:
-      context: ./
-      dockerfile: Dockerfile
       args:
         PROJECT: ${COMPOSE_PROJECT_NAME}
-    depends_on:
-      - bedrock_europe
     network_mode: none
   iberia_africa:
     build:
@@ -22,5 +15,5 @@ services:
       - ./pdf:/pdf
     network_mode: none      
     depends_on:
-      - europe_europe
+      - bedrock_europe
     

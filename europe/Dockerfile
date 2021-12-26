@@ -1,4 +1,4 @@
-FROM jac18281828/gmt:110521 as builder
+FROM jac18281828/bedrock:latest as builder
 
 WORKDIR /bedrock
 
@@ -16,6 +16,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         apt install -y -q --no-install-recommends \
         gmt gmt-gshhg-high ghostscript
 
+RUN apt clean
 RUN rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /bedrock/ETOPO1_europe.grd /bedrock/ETOPO1_europe.grd

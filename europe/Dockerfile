@@ -3,9 +3,9 @@ FROM jac18281828/bedrock:latest as builder
 WORKDIR /bedrock
 
 ARG WEST=-15
-ARG EAST=42
-ARG NORTH=45
-ARG SOUTH=29
+ARG EAST=20
+ARG NORTH=50
+ARG SOUTH=25
 
 RUN gmt grdcut /bedrock/ETOPO1_Bed_g_gmt4.grd -R${WEST}/${EAST}/${SOUTH}/${NORTH} -G/bedrock/ETOPO1_europe.grd
 

@@ -16,4 +16,14 @@ services:
     network_mode: none      
     depends_on:
       - bedrock_europe
+  iberia:
+    build:
+      context: iberia/
+      args:
+        PROJECT: ${COMPOSE_PROJECT_NAME}
+    volumes:
+      - ./pdf:/pdf
+    network_mode: none      
+    depends_on:
+      - bedrock_europe
     

@@ -7,7 +7,7 @@ ENV LANG=C.UTF-8 \
 WORKDIR /europe
 
 ARG WORK=iberia
-COPY . ${WORK}
 WORKDIR /europe/${WORK}
+COPY . .
 
 CMD ./iberia.sh

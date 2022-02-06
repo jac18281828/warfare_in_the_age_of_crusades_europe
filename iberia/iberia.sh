@@ -97,5 +97,6 @@ gmt begin /pdf/${PROJECT}
     if [ -f place.dat ]
     then
         cat place.dat | gmt text -Dj6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -F+f6p,AvantGarde-Book+jCB
+        cat place.dat | gmt plot -Sx6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} 
     fi
 gmt end

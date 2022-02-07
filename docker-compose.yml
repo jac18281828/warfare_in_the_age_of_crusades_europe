@@ -11,9 +11,10 @@ services:
       context: iberia_africa/
       args:
         PROJECT: ${COMPOSE_PROJECT_NAME}
+        NAME: iberia_africa
     volumes:
       - ./pdf:/pdf
-    network_mode: none      
+    network_mode: none
     depends_on:
       - bedrock_europe
   iberia:
@@ -21,9 +22,20 @@ services:
       context: iberia/
       args:
         PROJECT: ${COMPOSE_PROJECT_NAME}
+        NAME: iberia
     volumes:
       - ./pdf:/pdf
-    network_mode: none      
+    network_mode: none
     depends_on:
       - bedrock_europe
-    
+  pyrenees:
+    build:
+      context: pyrenees/
+      args:
+        PROJECT: ${COMPOSE_PROJECT_NAME}
+        NAME: pyrenees
+    volumes:
+      - ./pdf:/pdf
+    network_mode: none
+    depends_on:
+      - bedrock_europe

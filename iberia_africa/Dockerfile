@@ -1,13 +1,15 @@
 ARG PROJECT
 FROM ${PROJECT}_bedrock_europe:latest
+ARG NAME
 
 ENV LANG=C.UTF-8 \
-    TZ=CDT6CST
+        TZ=CDT6CST \
+        NAME=${NAME}
 
 WORKDIR /europe
 
-ARG WORK=iberia_africa
+ARG WORK=${NAME}
 WORKDIR /europe/${WORK}
 COPY . .
 
-CMD ./iberia_africa.sh
+CMD ./build_map.sh

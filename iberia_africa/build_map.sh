@@ -1,9 +1,9 @@
 #!/usr/bin/env /bin/sh
 
-WEST=-10
-EAST=8
-NORTH=46
-SOUTH=34
+WEST=-12
+EAST=5
+SOUTH=30
+NORTH=45
 
 WIDTH=15c
 PROJECTION=-JM10/${WIDTH}
@@ -56,7 +56,7 @@ gmt set PS_LINE_CAP=ROUND PS_LINE_JOIN=ROUND PS_SCALE_X=1 PS_SCALE_Y=1 MAP_ORIGI
 
 BASEMAP='-B10dg10d -B+gwhite'
 
-PROJECT='iberia'
+PROJECT="${NAME}"
 
 gmt begin /pdf/${PROJECT}
     gmt basemap -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} ${BASEMAP} 
@@ -97,6 +97,6 @@ gmt begin /pdf/${PROJECT}
     if [ -f place.dat ]
     then
         cat place.dat | gmt text -Dj6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -F+f6p,AvantGarde-Book+jCB
-        cat place.dat | gmt plot -Sx6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} 
+        cat place.dat | gmt plot -Sx6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT}        
     fi
 gmt end

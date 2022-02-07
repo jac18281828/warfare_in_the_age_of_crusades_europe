@@ -1,9 +1,9 @@
 #!/usr/bin/env /bin/sh
 
-WEST=-12
-EAST=5
-SOUTH=30
+WEST=-4
+EAST=4
 NORTH=45
+SOUTH=40
 
 WIDTH=15c
 PROJECTION=-JM10/${WIDTH}
@@ -17,7 +17,7 @@ LAKE=170
 RIVER=220
 TRANS=15
 MINAREA=-A100
-SCALEBAR="f-5.5/32/40/250M"
+SCALEBAR="f2/41/40/50M"
 
 if [ ! -x $(which gmt) ]
 then
@@ -56,7 +56,7 @@ gmt set PS_LINE_CAP=ROUND PS_LINE_JOIN=ROUND PS_SCALE_X=1 PS_SCALE_Y=1 MAP_ORIGI
 
 BASEMAP='-B10dg10d -B+gwhite'
 
-PROJECT='iberia_africa'
+PROJECT="${NAME}"
 
 gmt begin /pdf/${PROJECT}
     gmt basemap -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} ${BASEMAP} 
@@ -97,6 +97,6 @@ gmt begin /pdf/${PROJECT}
     if [ -f place.dat ]
     then
         cat place.dat | gmt text -Dj6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -F+f6p,AvantGarde-Book+jCB
-        cat place.dat | gmt plot -Sx6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT}        
+        cat place.dat | gmt plot -Sx6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} 
     fi
 gmt end

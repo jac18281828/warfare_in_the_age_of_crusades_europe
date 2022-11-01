@@ -4,7 +4,7 @@ WORKDIR /bedrock
 
 ARG WEST=-15
 ARG EAST=20
-ARG NORTH=50
+ARG NORTH=55
 ARG SOUTH=25
 
 RUN gmt grdcut /bedrock/ETOPO1_Bed_g_gmt4.grd -R${WEST}/${EAST}/${SOUTH}/${NORTH} -G/bedrock/ETOPO1_europe.grd

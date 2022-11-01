@@ -39,3 +39,25 @@ services:
     network_mode: none
     depends_on:
       - bedrock_europe
+  england_and_portugal:
+    build:
+      context: england_and_portugal/
+      args:
+        PROJECT: ${COMPOSE_PROJECT_NAME}
+        NAME: england
+    volumes:
+      - ./pdf:/pdf
+    network_mode: none
+    depends_on:
+      - bedrock_europe
+  gibraltar:
+    build:
+      context: gibraltar/
+      args:
+        PROJECT: ${COMPOSE_PROJECT_NAME}
+        NAME: gibraltar
+    volumes:
+      - ./pdf:/pdf
+    network_mode: none
+    depends_on:
+      - bedrock_europe

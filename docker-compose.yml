@@ -28,6 +28,17 @@ services:
     network_mode: none
     depends_on:
       - bedrock_europe
+  iberia2:
+    build:
+      context: iberia2/
+      args:
+        PROJECT: ${COMPOSE_PROJECT_NAME}
+        NAME: iberia2
+    volumes:
+      - ./pdf:/pdf
+    network_mode: none
+    depends_on:
+      - bedrock_europe
   pyrenees:
     build:
       context: pyrenees/

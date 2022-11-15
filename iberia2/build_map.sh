@@ -1,7 +1,7 @@
 #!/usr/bin/env /bin/sh
 
 WEST=-10
-EAST=6
+EAST=5
 NORTH=44
 SOUTH=35.5
 
@@ -17,7 +17,7 @@ LAKE=170
 RIVER=220
 TRANS=15
 MINAREA=-A100
-SCALEBAR="f0/37/40/250M"
+SCALEBAR="f0/37/40/100M"
 
 if [ ! -x $(which gmt) ]
 then

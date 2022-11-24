@@ -1,5 +1,5 @@
 ARG PROJECT
-FROM ${PROJECT}_bedrock_europe:latest
+FROM ${PROJECT}-bedrock_europe:latest
 ARG NAME
 
 ENV LANG=C.UTF-8 \

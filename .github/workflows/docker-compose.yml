@@ -15,4 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build with docker-compose
-      run: docker-compose build
+      run: |
+        docker compose build bedrock_europe
+        docker-compose build

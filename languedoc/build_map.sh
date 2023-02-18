@@ -36,19 +36,18 @@ fi
 
 gmt gtd2cpt --show-sharedir
 
-# ETOPO1_Bed_g_gmt4.grd is the NETCDF encoded ETOPO1 dataset downloaded for GMT4 Bedrock
-BEDROCK=ETOPO1_europe.grd
+BEDROCK=ETOPO_europe.nc
 
 if [ -f /bedrock/${BEDROCK} ]
 then
-    ETOPO1=/bedrock/${BEDROCK}
+    ETOPO=/bedrock/${BEDROCK}
 else
-    ETOPO1=../ETOPO1_Bed_g_gmt4.grd
+    ETOPO=../ETOPO_2022_v1_30s_N90W180_bed.nc
 fi
 
-if [ ! -f ${ETOPO1} ]
+if [ ! -f ${ETOPO} ]
 then
-    echo "ETOPO1 GRID file is required"
+    echo "ETOPO GRID file is required"
     exit 1
 fi
 
@@ -61,7 +60,7 @@ PROJECT="${NAME}"
 gmt begin /pdf/${PROJECT}
     gmt basemap -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} ${BASEMAP} 
     gmt makecpt -Cgrey -T-50/1500
-    gmt grdimage ${ETOPO1} -n+c -I+a45+nt1 ${PROJECTION} -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${OPT}
+    gmt grdimage ${ETOPO} -n+c -I+a45+nt1 ${PROJECTION} -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${OPT}
 
     gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH}  ${PROJECTION} ${OPT} -G${LAND}/${LAND}/${LAND}@${TRANS} ${MINAREA}
     gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -S${LAKE}/${LAKE}/${LAKE} ${MINAREA}

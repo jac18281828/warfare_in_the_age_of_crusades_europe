@@ -1,11 +1,5 @@
 version: "3.9"
 services:
-  bedrock_europe:
-    build:
-      context: europe/
-      args:
-        PROJECT: ${COMPOSE_PROJECT_NAME}
-    network_mode: none
   iberia_africa:
     build:
       context: iberia_africa/
@@ -15,8 +9,6 @@ services:
     volumes:
       - ./pdf:/pdf
     network_mode: none
-    depends_on:
-      - bedrock_europe
   iberia:
     build:
       context: iberia/
@@ -26,8 +18,6 @@ services:
     volumes:
       - ./pdf:/pdf
     network_mode: none
-    depends_on:
-      - bedrock_europe
   iberia2:
     build:
       context: iberia2/
@@ -37,8 +27,6 @@ services:
     volumes:
       - ./pdf:/pdf
     network_mode: none
-    depends_on:
-      - bedrock_europe
   pyrenees:
     build:
       context: pyrenees/
@@ -48,8 +36,6 @@ services:
     volumes:
       - ./pdf:/pdf
     network_mode: none
-    depends_on:
-      - bedrock_europe
   england_and_portugal:
     build:
       context: england_and_portugal/
@@ -59,8 +45,6 @@ services:
     volumes:
       - ./pdf:/pdf
     network_mode: none
-    depends_on:
-      - bedrock_europe
   gibraltar:
     build:
       context: gibraltar/
@@ -70,16 +54,12 @@ services:
     volumes:
       - ./pdf:/pdf
     network_mode: none
-    depends_on:
-      - bedrock_europe
-  france:
+  languedoc:
     build:
-      context: france/
+      context: languedoc/
       args:
         PROJECT: ${COMPOSE_PROJECT_NAME}
-        NAME: france
+        NAME: languedoc
     volumes:
       - ./pdf:/pdf
     network_mode: none
-    depends_on:
-      - bedrock_europe

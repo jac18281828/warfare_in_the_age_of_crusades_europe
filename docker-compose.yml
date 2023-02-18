@@ -72,3 +72,14 @@ services:
     network_mode: none
     depends_on:
       - bedrock_europe
+  france:
+    build:
+      context: france/
+      args:
+        PROJECT: ${COMPOSE_PROJECT_NAME}
+        NAME: france
+    volumes:
+      - ./pdf:/pdf
+    network_mode: none
+    depends_on:
+      - bedrock_europe

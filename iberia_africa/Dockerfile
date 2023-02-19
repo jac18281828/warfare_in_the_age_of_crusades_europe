@@ -19,6 +19,8 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt clean && \
     rm -rf /var/lib/apt/lists/*
 
+COPY --from=builder /bedrock/ETOPO_europe.nc /bedrock/ETOPO_europe.nc
+
 ENV LANG=C.UTF-8 \
         TZ=CDT6CST \
         NAME=${NAME}

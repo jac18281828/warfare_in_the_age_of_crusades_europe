@@ -1,9 +1,9 @@
 #!/usr/bin/env /bin/sh
 
-WEST=-3
-EAST=10
-NORTH=50
-SOUTH=40
+WEST=-2
+EAST=7
+NORTH=47
+SOUTH=41
 
 WIDTH=15c
 PROJECTION=-JM10/${WIDTH}
@@ -17,7 +17,7 @@ LAKE=170
 RIVER=220
 TRANS=15
 MINAREA=-A100
-SCALEBAR="f-5.5/32/40/250M"
+SCALEBAR="f4.5/42/40/50M"
 
 if [ ! -x $(which gmt) ]
 then
@@ -42,18 +42,13 @@ if [ -f /bedrock/${BEDROCK} ]
 then
     ETOPO=/bedrock/${BEDROCK}
 else
-    ETOPO=../ETOPO_2022_v1_30s_N90W180_bed.nc
-fi
-
-if [ ! -f ${ETOPO} ]
-then
-    echo "ETOPO GRID file is required"
+    echo "${ETOPO} not found"
     exit 1
 fi
 
 gmt set PS_LINE_CAP=ROUND PS_LINE_JOIN=ROUND PS_SCALE_X=1 PS_SCALE_Y=1 MAP_ORIGIN_X=1c MAP_ORIGIN_Y=1c ANNOT_FONT_PRIMARY=18
 
-BASEMAP='-B10dg10d -B+gwhite'
+BASEMAP='-B3dg3d -B+gwhite'
 
 PROJECT="${NAME}"
 

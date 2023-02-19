@@ -36,14 +36,14 @@ fi
 
 gmt gtd2cpt --show-sharedir
 
-# ETOPO1_Bed_g_gmt4.grd is the NETCDF encoded ETOPO1 dataset downloaded for GMT4 Bedrock
-BEDROCK=ETOPO1_europe.grd
+BEDROCK=ETOPO_europe.nc
 
 if [ -f /bedrock/${BEDROCK} ]
 then
-    ETOPO1=/bedrock/${BEDROCK}
+    ETOPO=/bedrock/${BEDROCK}
 else
-    ETOPO1=../ETOPO1_Bed_g_gmt4.grd
+    echo "${ETOPO} not found"
+    exit 1
 fi
 
 if [ ! -f ${ETOPO1} ]

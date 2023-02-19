@@ -2,9 +2,9 @@ FROM jac18281828/bedrock:latest as builder
 
 WORKDIR /bedrock
 
-ARG WEST=-5
+ARG WEST=-15
 ARG EAST=15
-ARG NORTH=55
+ARG NORTH=50
 ARG SOUTH=25
 
 RUN ls -l /bedrock
@@ -21,7 +21,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /bedrock/ETOPO_europe.nc /bedrock/ETOPO_europe.nc
-
 
 ENV LANG=C.UTF-8 \
         TZ=CDT6CST \

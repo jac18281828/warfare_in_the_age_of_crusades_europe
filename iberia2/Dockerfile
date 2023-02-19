@@ -1,4 +1,4 @@
-FROM jac18281828/bedrock:latest as builder
+FROM ghcr.io/jac18281828/bedrock:latest as builder
 
 WORKDIR /bedrock
 

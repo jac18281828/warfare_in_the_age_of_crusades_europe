@@ -1,9 +1,9 @@
 #!/usr/bin/env /bin/sh
 
-WEST=-6
-EAST=2
-NORTH=47
-SOUTH=42
+WEST=-4
+EAST=4
+NORTH=45
+SOUTH=40
 
 WIDTH=15c
 PROJECTION=-JM10/${WIDTH}

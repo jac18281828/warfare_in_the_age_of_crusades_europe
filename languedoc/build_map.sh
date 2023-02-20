@@ -1,9 +1,9 @@
 #!/usr/bin/env /bin/sh
 
-WEST=-2
-EAST=7
-NORTH=47
-SOUTH=41
+WEST=0
+EAST=3.5
+NORTH=45.5
+SOUTH=42
 
 WIDTH=15c
 PROJECTION=-JM10/${WIDTH}
@@ -17,7 +17,7 @@ LAKE=170
 RIVER=220
 TRANS=15
 MINAREA=-A100
-SCALEBAR="f4.5/42/40/50M"
+SCALEBAR="f2.5/42/40/50M"
 
 if [ ! -x $(which gmt) ]
 then

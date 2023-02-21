@@ -94,3 +94,23 @@ gmt begin /pdf/${PROJECT}
         cat place.dat | gmt plot -Sx6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} 
     fi
 gmt end
+
+IRECT='-R-10/15/35/50'
+IPROJ='-JM10/2i'
+
+gmt begin /pdf/${PROJECT}_inset
+  gmt basemap ${IRECT} ${IPROJ} ${OPT} -B+ggrey
+  gmt coast ${IRECT}  ${IPROJ} ${OPT} -G${LAND}/${LAND}/${LAND}@${TRANS}
+  gmt coast ${IRECT} ${IPROJ} ${OPT} -S${LAKE}/${LAKE}/${LAKE}
+  gmt coast ${IRECT} ${IPROJ} ${OPT} -N1,3/0.25p,${LAKE}/${LAKE}/${LAKE}
+  cat city.dat | gmt plot -Sc2p ${IRECT} ${IPROJ} ${OPT}
+  cat battle.dat | gmt plot -S+2p ${IRECT} ${IPROJ} ${OPT}
+  gmt plot -W0.5p ${IRECT} ${IPROJ} ${OPT} <<EOF
+0 42
+3.5 42
+3.5 45.5
+0 45.5
+0 42
+EOF
+    
+gmt end    

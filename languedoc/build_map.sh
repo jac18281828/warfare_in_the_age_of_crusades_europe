@@ -70,6 +70,13 @@ gmt begin /pdf/${PROJECT}
         cat city.dat | gmt plot -Sc2p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT}
     fi
 
+    if [ -f town.dat ]
+    then
+        cat town.dat | gmt text -Dj6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -F+f6p,Helvetica+jCB
+        cat town.dat | gmt plot -Sc2p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT}
+    fi
+    
+
     if [ -f castle.dat ]
     then
         cat castle.dat | gmt text -Dj6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -F+f6p,ZapfChancery-MediumItalic+jCB

@@ -1,9 +1,9 @@
 #!/usr/bin/env /bin/sh
 
-WEST=0
+WEST=0.5
 EAST=3.5
-NORTH=45.5
-SOUTH=42
+NORTH=45
+SOUTH=42.5
 
 WIDTH=15c
 PROJECTION=-JM10/${WIDTH}
@@ -17,7 +17,7 @@ LAKE=170
 RIVER=220
 TRANS=15
 MINAREA=-A100
-SCALEBAR="f2.5/42/40/50M"
+SCALEBAR="f1/43/40/50M"
 
 if [ ! -x $(which gmt) ]
 then
@@ -113,11 +113,11 @@ gmt begin /pdf/${PROJECT}_inset
   cat city.dat | gmt plot -Sc2p ${IRECT} ${IPROJ} ${OPT}
   cat battle.dat | gmt plot -S+2p ${IRECT} ${IPROJ} ${OPT}
   gmt plot -W0.5p ${IRECT} ${IPROJ} ${OPT} <<EOF
-0 42
-3.5 42
-3.5 45.5
-0 45.5
-0 42
+0.5 42.5
+3.5 42.5
+3.5 45
+0.5 45
+0.5 42.5
 EOF
     
 gmt end    

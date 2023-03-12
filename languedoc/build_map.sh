@@ -108,8 +108,8 @@ IPROJ='-JM10/2i'
 gmt begin /pdf/${PROJECT}_inset
   gmt basemap ${IRECT} ${IPROJ} ${OPT} -B+ggrey
   gmt coast ${IRECT}  ${IPROJ} ${OPT} -G${LAND}/${LAND}/${LAND}@${TRANS}
-  gmt coast ${IRECT} ${IPROJ} ${OPT} -S${LAKE}/${LAKE}/${LAKE}
-  gmt coast ${IRECT} ${IPROJ} ${OPT} -N1,3/0.25p,${LAKE}/${LAKE}/${LAKE}
+#  gmt coast ${IRECT} ${IPROJ} ${OPT} -S${LAKE}/${LAKE}/${LAKE}
+#  gmt coast ${IRECT} ${IPROJ} ${OPT} -N1,3/0.25p,${LAKE}/${LAKE}/${LAKE}
   cat city.dat | gmt plot -Sc2p ${IRECT} ${IPROJ} ${OPT}
   cat battle.dat | gmt plot -S+2p ${IRECT} ${IPROJ} ${OPT}
   gmt plot -W0.5p ${IRECT} ${IPROJ} ${OPT} <<EOF

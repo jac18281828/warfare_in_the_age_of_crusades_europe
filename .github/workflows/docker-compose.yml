@@ -17,3 +17,4 @@ jobs:
     - name: Build with docker-compose
       run: |
         docker compose build
+

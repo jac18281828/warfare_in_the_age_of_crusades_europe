@@ -1,9 +1,9 @@
 #!/usr/bin/env /bin/sh
 
 WEST=0.5
-EAST=3.5
-NORTH=45
-SOUTH=42.5
+EAST=5
+NORTH=45.5
+SOUTH=41
 
 WIDTH=15c
 PROJECTION=-JM10/${WIDTH}
@@ -17,7 +17,7 @@ LAKE=170
 RIVER=220
 TRANS=15
 MINAREA=-A100
-SCALEBAR="f1/43/40/50M"
+SCALEBAR="f2/42/40/50M"
 
 if [ ! -x $(which gmt) ]
 then
@@ -70,6 +70,13 @@ gmt begin /pdf/${PROJECT}
         cat city.dat | gmt plot -Sc2p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT}
     fi
 
+    if [ -f route.dat ]
+    then
+        cat route.dat | gmt text -Dj6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -F+f6p,Helvetica+jCB
+        cat route.dat | gmt plot -Sc2p -C0,0,0 -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT}
+    fi
+    
+
     if [ -f town.dat ]
     then
         cat town.dat | gmt text -Dj6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -F+f6p,Helvetica+jCB
@@ -108,7 +115,6 @@ IPROJ='-JM10/2i'
 gmt begin /pdf/${PROJECT}_inset
   gmt basemap ${IRECT} ${IPROJ} ${OPT} -B+ggrey
   gmt coast ${IRECT}  ${IPROJ} ${OPT} -G${LAND}/${LAND}/${LAND}@${TRANS}
-  gmt coast ${IRECT} ${IPROJ} ${OPT} -N1,3/0.25p,${LAKE}/${LAKE}/${LAKE}
   cat city.dat | gmt plot -Sc2p ${IRECT} ${IPROJ} ${OPT}
   cat battle.dat | gmt plot -S+2p ${IRECT} ${IPROJ} ${OPT}
   gmt plot -W0.5p ${IRECT} ${IPROJ} ${OPT} <<EOF

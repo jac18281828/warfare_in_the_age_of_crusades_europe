@@ -63,3 +63,12 @@ services:
     volumes:
       - ./pdf:/pdf
     network_mode: none
+  cathar_france:
+    build:
+      context: cathar_france/
+      args:
+        PROJECT: ${COMPOSE_PROJECT_NAME}
+        NAME: cathar_france
+    volumes:
+      - ./pdf:/pdf
+    network_mode: none

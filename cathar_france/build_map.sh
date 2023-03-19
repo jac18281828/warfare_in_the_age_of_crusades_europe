@@ -1,9 +1,9 @@
 #!/usr/bin/env /bin/sh
 
-WEST=0.5
+WEST=1
 EAST=5
-NORTH=45.5
-SOUTH=41
+NORTH=45
+SOUTH=42
 
 WIDTH=15c
 PROJECTION=-JM10/${WIDTH}
@@ -17,7 +17,7 @@ LAKE=170
 RIVER=220
 TRANS=15
 MINAREA=-A100
-SCALEBAR="f2/42/40/50M"
+SCALEBAR="f2/42.5/40/50M"
 
 if [ ! -x $(which gmt) ]
 then
@@ -57,12 +57,12 @@ gmt begin /pdf/${PROJECT}
     gmt makecpt -Cgrey -T-50/1500
     gmt grdimage ${ETOPO} -n+c -I+a45+nt1 ${PROJECTION} -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${OPT}
 
-    gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH}  ${PROJECTION} ${OPT} -G${LAND}/${LAND}/${LAND}@${TRANS} ${MINAREA}
-    gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -S${LAKE}/${LAKE}/${LAKE} ${MINAREA}
+    gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH}  ${PROJECTION} ${OPT} -G${LAND} -t${TRANS} ${MINAREA}
+    gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -S${LAKE} ${MINAREA}
     gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} ${LINE} ${MINAREA}
-    gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -I0/0.5p,${RIVER}/${RIVER}/${RIVER} -I1/0.5p,${RIVER}/${RIVER}/${RIVER} -I2/0.5p,${RIVER}/${RIVER}/${RIVER} ${MINAREA}
+    gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -I0/0.5p,${RIVER} -I1/0.5p,${RIVER} -I2/0.5p,${RIVER} ${MINAREA}
     # water bounds
-    gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -L${SCALEBAR} -N3/0.25p,${LAKE}/${LAKE}/${LAKE} ${MINAREA}
+    gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -L${SCALEBAR} -N3/0.25p,${LAKE} ${MINAREA}
 
     if [ -f city.dat ]
     then
@@ -120,9 +120,9 @@ IPROJ='-JM10/2i'
 
 gmt begin /pdf/${PROJECT}_inset
   gmt basemap ${IRECT} ${IPROJ} ${OPT} -B+ggrey
-  gmt coast ${IRECT}  ${IPROJ} ${OPT} -G${LAND}/${LAND}/${LAND}@${TRANS}
-  cat city.dat | gmt plot -Sc2p ${IRECT} ${IPROJ} ${OPT}
-  cat battle.dat | gmt plot -S+2p ${IRECT} ${IPROJ} ${OPT}
+  gmt coast ${IRECT}  ${IPROJ} ${OPT} -G${LAND} -t${TRANS} -A1000
+  gmt coast ${IRECT} ${IPROJ} ${OPT} -N1,3/0.25p,${LAKE}  
+  cat route.dat | gmt plot -Sc2p ${IRECT} ${IPROJ} ${OPT}
   gmt plot -W0.5p ${IRECT} ${IPROJ} ${OPT} <<EOF
 ${WEST} ${SOUTH}
 ${EAST} ${SOUTH}

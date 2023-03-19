@@ -1,4 +1,4 @@
-FROM ghcr.io/jac18281828/bedrock:latest as builder
+FROM ghcr.io/jac18281828/bedrock:bed as builder
 
 WORKDIR /bedrock
 
@@ -7,7 +7,6 @@ ARG EAST=15
 ARG NORTH=50
 ARG SOUTH=25
 
-RUN ls -l /bedrock
 RUN gmt grdcut /bedrock/ETOPO_2022_v1_30s_N90W180_bed.nc -R${WEST}/${EAST}/${SOUTH}/${NORTH} -G/bedrock/ETOPO_europe.nc
 
 FROM debian:stable-slim

@@ -90,3 +90,12 @@ services:
     volumes:
       - ./pdf:/pdf
     network_mode: none
+  baltic:
+    build:
+      context: baltic/
+      args:
+        PROJECT: ${COMPOSE_PROJECT_NAME}
+        NAME: baltic
+    volumes:
+      - ./pdf:/pdf
+    network_mode: none

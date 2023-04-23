@@ -15,7 +15,7 @@ ARG NAME=iberia
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt update && \
     apt install -y -q --no-install-recommends \
-    gmt gmt-gshhg-high ghostscript \
+    gmt gmt-gshhg-high ghostscript ripgrep \
     git curl gnupg2 \
     ca-certificates apt-transport-https && \
     apt clean && \

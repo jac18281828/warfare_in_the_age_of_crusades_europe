@@ -15,9 +15,14 @@ ARG NAME=iberia
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt update && \
     apt install -y -q --no-install-recommends \
-    gmt gmt-gshhg-high ghostscript && \
+    gmt gmt-gshhg-high ghostscript \
+    git curl gnupg2 && \
     apt clean && \
     rm -rf /var/lib/apt/lists/*
+
+RUN useradd --create-home -s /bin/bash jac
+RUN usermod -a -G sudo jac
+RUN echo '%jac ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers    
 
 COPY --from=builder /bedrock/ETOPO_europe.nc /bedrock/ETOPO_europe.nc
 
@@ -27,6 +32,6 @@ ENV LANG=C.UTF-8 \
 
 WORKDIR /europe
 
-ARG WORK=${NAME}
-WORKDIR /europe/${WORK}
-COPY . .
+ENV USER=jac
+USER jac
+COPY --chown=jac.jac . .

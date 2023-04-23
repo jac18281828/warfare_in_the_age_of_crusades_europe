@@ -16,7 +16,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt update && \
     apt install -y -q --no-install-recommends \
     gmt gmt-gshhg-high ghostscript \
-    git curl gnupg2 && \
+    git curl gnupg2 ca-certificates apt-transport-https && \
     apt clean && \
     rm -rf /var/lib/apt/lists/*
 

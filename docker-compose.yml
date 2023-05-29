@@ -99,3 +99,12 @@ services:
     volumes:
       - ./pdf:/pdf
     network_mode: none
+  prussia:
+    build:
+      context: prussia/
+      args:
+        PROJECT: ${COMPOSE_PROJECT_NAME}
+        NAME: prussia
+    volumes:
+      - ./pdf:/pdf
+    network_mode: none

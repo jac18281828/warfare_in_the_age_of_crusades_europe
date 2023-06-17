@@ -108,3 +108,12 @@ services:
     volumes:
       - ./pdf:/pdf
     network_mode: none
+  eastern_europe:
+    build:
+      context: eastern_europe/
+      args:
+        PROJECT: ${COMPOSE_PROJECT_NAME}
+        NAME: eastern_europe
+    volumes:
+      - ./pdf:/pdf
+    network_mode: none

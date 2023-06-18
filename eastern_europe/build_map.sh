@@ -62,6 +62,7 @@ gmt begin /pdf/${PROJECT}
     gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -I0/0.5p,${RIVER} -I1/0.5p,${RIVER} -I2/0.5p,${RIVER} ${MINAREA}
     # water bounds
     gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -L${SCALEBAR} -N3/0.25p,${LAKE} ${MINAREA}
+    gmt coast -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} -N1/0.5p,150 ${MINAREA}
 
     if [ -f city.dat ]
     then

@@ -117,3 +117,12 @@ services:
     volumes:
       - ./pdf:/pdf
     network_mode: none
+  bohemia:
+    build:
+      context: bohemia/
+      args:
+        PROJECT: ${COMPOSE_PROJECT_NAME}
+        NAME: bohemia
+    volumes:
+      - ./pdf:/pdf
+    network_mode: none

@@ -101,3 +101,22 @@ gmt begin /pdf/${PROJECT}
         cat place.dat | gmt plot -Sx6p -R${WEST}/${EAST}/${SOUTH}/${NORTH} ${PROJECTION} ${OPT} 
     fi
 gmt end
+
+
+IRECT='-R5/32/47/62'
+IPROJ='-JM10/2i'
+
+gmt begin /pdf/${PROJECT}_inset
+  gmt basemap ${IRECT} ${IPROJ} ${OPT} -B+ggrey
+  gmt coast ${IRECT}  ${IPROJ} ${OPT} -G${LAND} -t${TRANS} -A1000
+  gmt coast ${IRECT} ${IPROJ} ${OPT} -N1,3/0.25p,${LAKE}  
+  cat route.dat | gmt plot -Sc2p ${IRECT} ${IPROJ} ${OPT}
+  gmt plot -W0.5p ${IRECT} ${IPROJ} ${OPT} <<EOF
+${WEST} ${SOUTH}
+${EAST} ${SOUTH}
+${EAST} ${NORTH}
+${WEST} ${NORTH}
+${WEST} ${SOUTH}
+EOF
+    
+gmt end    

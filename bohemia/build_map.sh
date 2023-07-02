@@ -16,7 +16,7 @@ LAKE=170
 RIVER=220
 TRANS=15
 MINAREA=-A100
-SCALEBAR="f15/50/40/250M"
+SCALEBAR="f15/50/40/125M"
 
 if [ ! -x $(which gmt) ]
 then
